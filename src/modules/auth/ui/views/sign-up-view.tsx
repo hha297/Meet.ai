@@ -13,7 +13,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { authClient } from '@/lib/auth-client';
-
+import { toast } from 'sonner';
+import { FaGoogle, FaGithub } from 'react-icons/fa';
 const formSchema = z
         .object({
                 name: z.string().min(1, { message: 'Name is required' }),
@@ -49,6 +50,7 @@ export const SignUpView = () => {
                                 name: data.name,
                                 email: data.email,
                                 password: data.password,
+                                callbackURL: '/',
                         },
                         {
                                 onSuccess: () => {
@@ -57,6 +59,29 @@ export const SignUpView = () => {
                                 },
                                 onError: ({ error }) => {
                                         setPending(false);
+                                        setError(error.message || 'An error occurred during sign in');
+                                },
+                        },
+                );
+        };
+
+        const onSocialSignIn = (provider: 'google' | 'github') => {
+                setError(null);
+                setPending(true);
+
+                authClient.signIn.social(
+                        {
+                                provider: provider,
+                                callbackURL: '/',
+                        },
+                        {
+                                onSuccess: () => {
+                                        toast.success('Successfully signed in with ' + provider);
+                                        setPending(false);
+                                },
+                                onError: ({ error }) => {
+                                        setPending(false);
+                                        toast.error('An error occurred during sign in with ' + provider);
                                         setError(error.message || 'An error occurred during sign in');
                                 },
                         },
@@ -183,16 +208,20 @@ export const SignUpView = () => {
                                                                                 disabled={pending}
                                                                                 variant="outline"
                                                                                 type="button"
-                                                                                className="w-full"
+                                                                                className="w-full cursor-pointer"
+                                                                                onClick={() => onSocialSignIn('google')}
                                                                         >
+                                                                                <FaGoogle />
                                                                                 Google
                                                                         </Button>
                                                                         <Button
                                                                                 disabled={pending}
                                                                                 variant="outline"
                                                                                 type="button"
-                                                                                className="w-full"
+                                                                                className="w-full cursor-pointer"
+                                                                                onClick={() => onSocialSignIn('github')}
                                                                         >
+                                                                                <FaGithub />
                                                                                 GitHub
                                                                         </Button>
                                                                 </div>
