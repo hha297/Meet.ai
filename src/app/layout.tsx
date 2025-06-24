@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import { TRPCReactProvider } from '@/trpc/client';
+import { Toaster } from 'sonner';
 
 const spaceGrotesk = Space_Grotesk({
         subsets: ['latin'],
@@ -21,7 +22,10 @@ export default function RootLayout({
         return (
                 <TRPCReactProvider>
                         <html lang="en">
-                                <body className={`${spaceGrotesk.className} antialiased`}>{children}</body>
+                                <body className={`${spaceGrotesk.className} antialiased`}>
+                                        <Toaster />
+                                        {children}
+                                </body>
                         </html>
                 </TRPCReactProvider>
         );
