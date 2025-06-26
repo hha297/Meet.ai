@@ -6,17 +6,25 @@ import { useTRPC } from '@/trpc/client';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import React from 'react';
 import { DataTable } from '../components/data-table';
-import { columns, Payment } from '../components/columns';
+import { columns } from '../components/columns';
 import { EmptyState } from '@/components/empty-state';
+import { useAgentsFilters } from '../../hooks/use-agents-filters';
+import { AgentsDataPagination } from '../components/agents-data-pagination';
 
 export const AgentsView = () => {
+        const [filters, setFilters] = useAgentsFilters();
         const trpc = useTRPC();
-        const { data } = useSuspenseQuery(trpc.agents.getMany.queryOptions());
+        const { data } = useSuspenseQuery(trpc.agents.getMany.queryOptions({ ...filters }));
 
         return (
                 <div className="flex-1 pb-4 px-4 md:px-8 flex flex-col gap-y-4">
-                        <DataTable data={data} columns={columns} />
-                        {data.length === 0 && (
+                        <DataTable data={data.items} columns={columns} />
+                        <AgentsDataPagination
+                                page={filters.page}
+                                totalPages={data.totalPages}
+                                onPageChange={(page) => setFilters({ page })}
+                        />
+                        {data.items.length === 0 && (
                                 <EmptyState
                                         title="Create Your First Agent"
                                         description="Create an agent to get started. Each agent will follow your instructions and interact with participants during the call."

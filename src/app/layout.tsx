@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import { TRPCReactProvider } from '@/trpc/client';
@@ -24,7 +25,7 @@ export default function RootLayout({
                         <html lang="en">
                                 <body className={`${spaceGrotesk.className} antialiased`}>
                                         <Toaster />
-                                        {children}
+                                        <NuqsAdapter>{children}</NuqsAdapter>
                                 </body>
                         </html>
                 </TRPCReactProvider>
