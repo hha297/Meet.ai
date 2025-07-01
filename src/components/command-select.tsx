@@ -23,11 +23,12 @@ export const CommandSelect = ({
         onSearch,
         value,
         placeholder = 'Select an option',
-        isSearchable,
+        isSearchable = true,
         className,
 }: CommandSelectProps) => {
         const [open, setOpen] = useState(false);
         const selectedOption = options.find((option) => option.value === value);
+
         return (
                 <>
                         <Button
@@ -43,7 +44,11 @@ export const CommandSelect = ({
                                 <div>{selectedOption?.children ?? placeholder}</div>
                         </Button>
                         <CommandResponsiveDialog shouldFilter={!onSearch} open={open} onOpenChange={setOpen}>
-                                <CommandInput placeholder={'Search'} onValueChange={onSearch} />
+                                <CommandInput
+                                        placeholder={'Search'}
+                                        onValueChange={onSearch}
+                                        disabled={!isSearchable}
+                                />
                                 <CommandList>
                                         <CommandEmpty className="text-muted-foreground text-center text-sm py-4">
                                                 No results found.
