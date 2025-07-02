@@ -156,7 +156,7 @@ export const MeetingForm = ({ onSuccess, onCancel, initialValues }: MeetingFormP
                                                                                         setOpenNewAgentDialog(true)
                                                                                 }
                                                                         >
-                                                                                Create new button
+                                                                                Create new agent
                                                                         </button>
                                                                 </FormDescription>
                                                                 <FormMessage />
