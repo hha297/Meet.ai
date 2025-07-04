@@ -82,6 +82,7 @@ export const meetingsProcedure = createTRPCRouter({
                                 duration: sql<number>`EXTRACT(EPOCH FROM (ended_at - started_at))`.as('duration'),
                         })
                         .from(meetings)
+                        .innerJoin(agents, eq(meetings.agentId, agents.id))
                         .where(and(eq(meetings.id, input.id), eq(meetings.userId, ctx.auth.user.id)));
 
                 if (!existingMeeting) throw new TRPCError({ code: 'NOT_FOUND', message: 'Meeting not found' });
