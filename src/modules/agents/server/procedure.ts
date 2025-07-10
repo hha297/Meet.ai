@@ -1,6 +1,6 @@
 import { db } from '@/db';
 import { agents } from '@/db/schema';
-import { createTRPCRouter, protectedProcedure } from '@/trpc/init';
+import { createTRPCRouter, premiumProcedure, protectedProcedure } from '@/trpc/init';
 import { agentsInsertSchema, agentsUpdateSchema } from '../schemas';
 import { z } from 'zod';
 import { and, count, desc, eq, getTableColumns, ilike, sql } from 'drizzle-orm';
@@ -69,16 +69,18 @@ export const agentsProcedure = createTRPCRouter({
                 if (!existingAgent) throw new TRPCError({ code: 'NOT_FOUND', message: 'Agent not found' });
                 return existingAgent;
         }),
-        create: protectedProcedure.input(agentsInsertSchema).mutation(async ({ input, ctx }) => {
-                const [createdAgent] = await db
-                        .insert(agents)
-                        .values({
-                                ...input,
-                                userId: ctx.auth.user.id,
-                        })
-                        .returning();
-                return createdAgent;
-        }),
+        create: premiumProcedure('agents')
+                .input(agentsInsertSchema)
+                .mutation(async ({ input, ctx }) => {
+                        const [createdAgent] = await db
+                                .insert(agents)
+                                .values({
+                                        ...input,
+                                        userId: ctx.auth.user.id,
+                                })
+                                .returning();
+                        return createdAgent;
+                }),
         remove: protectedProcedure.input(z.object({ id: z.string() })).mutation(async ({ input, ctx }) => {
                 const [removedAgent] = await db
                         .delete(agents)

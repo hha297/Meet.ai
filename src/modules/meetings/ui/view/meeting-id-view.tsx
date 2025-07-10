@@ -29,8 +29,10 @@ export const MeetingIdView = ({ meetingId }: MeetingIdViewProps) => {
 
         const removeMeeting = useMutation(
                 trpc.meetings.remove.mutationOptions({
-                        onSuccess: () => {
-                                queryClient.invalidateQueries(trpc.meetings.getMany.queryOptions({}));
+                        onSuccess: async () => {
+                                await queryClient.invalidateQueries(trpc.meetings.getMany.queryOptions({}));
+                                await queryClient.invalidateQueries(trpc.premium.getFreeUsage.queryOptions());
+                                toast.success('Meeting deleted.');
                                 router.push('/meetings');
                         },
                         onError: (error) => {
