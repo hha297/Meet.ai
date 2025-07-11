@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Meet.ai
 
-## Getting Started
+**Meet.ai** is a fully featured AI-powered video call platform built with modern technologies like Next.js 15, React 19, and powerful integrations including OpenAI, Stream, Inngest, Polar, and more.
 
-First, run the development server:
+It supports real-time conversations with custom AI agents, automatic meeting summaries and transcripts, AI-powered Q&A, video playback, searchable history, and seamless authentication and subscriptions.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## ✨ Key Features
+
+- 🤖 AI-powered video calls  
+- 🧠 Custom real-time agents  
+- 📞 Stream Video SDK  
+- 💬 Stream Chat SDK  
+- 📝 Summaries, transcripts, and recordings  
+- 📂 Meeting history & statuses  
+- 🔍 Transcript search  
+- 📺 Video playback  
+- 💬 AI meeting Q&A  
+- 🧠 OpenAI integration  
+- 💳 Polar subscriptions  
+- 🔐 Better Auth login  
+- 📱 Mobile responsive  
+- 🌐 Next.js 15 + React 19  
+- 🎨 Tailwind v4 + Shadcn/ui  
+- ⚙️ Inngest background jobs  
+- 🧑‍💻 CodeRabbit PR reviews  
+
+---
+
+
+## 🧱 Technologies Used
+
+- **Next.js 15** – [https://nextjs.org](https://nextjs.org)  
+- **React 19** – [https://react.dev](https://react.dev)  
+- **Tailwind CSS v4** – [https://tailwindcss.com](https://tailwindcss.com)  
+- **Shadcn/ui** – [https://ui.shadcn.com](https://ui.shadcn.com)  
+- **Stream Video** – [https://getstream.io/video](https://getstream.io/video)  
+- **Stream Chat** – [https://getstream.io/chat](https://getstream.io/chat)  
+- **Inngest** – [https://www.inngest.com](https://www.inngest.com)  
+- **OpenAI** – [https://platform.openai.com](https://platform.openai.com)  
+- **CodeRabbit** – [https://coderabbit.ai](https://coderabbit.ai)  
+- **Polar** – [https://polar.sh](https://polar.sh)  
+- **Vercel** – [https://vercel.com](https://vercel.com)  
+- **Neon PostgreSQL** – [https://neon.tech](https://neon.tech)  
+- **Better Auth** – [https://betterstack.com/auth](https://betterstack.com/auth)
+
+
+## 🔐 Environment Variables
+
+Below is the list of required environment variable names:
+
+```env
+DATABASE_URL  
+NEXT_PUBLIC_APP_URL
+
+BETTER_AUTH_SECRET  
+BETTER_AUTH_URL  
+GITHUB_CLIENT_ID  
+GITHUB_CLIENT_SECRET  
+GOOGLE_CLIENT_ID  
+GOOGLE_CLIENT_SECRET
+
+NEXT_PUBLIC_STREAM_VIDEO_API_KEY  
+STREAM_VIDEO_SECRET_KEY  
+NEXT_PUBLIC_STREAM_CHAT_API_KEY  
+STREAM_CHAT_SECRET_KEY
+
+OPENAI_API_KEY  
+POLAR_ACCESS_TOKEN
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> ℹ️ Add these to your `.env.local` for development. Never commit sensitive keys to source control.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Getting Started
 
-## Learn More
+1. Clone the repository:
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   git clone https://github.com/hha297/Meet.ai
+   cd Meet.ai
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Install dependencies:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+3. Create a `.env.local` file and fill in the required environment variables listed above.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Start the development server:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   ```bash
+   npm dev
+   ```
+
+---
