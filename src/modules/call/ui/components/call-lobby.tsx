@@ -46,6 +46,8 @@ export const CallLobby = ({ onJoin }: CallLobbyProps) => {
         const { hasBrowserPermission: hasCameraPermission } = useCameraState();
         const { hasBrowserPermission: hasMicrophonePermission } = useMicrophoneState();
 
+        const hasBrowserPermission = hasCameraPermission && hasMicrophonePermission;
+
         return (
                 <div className="flex flex-col items-center justify-center h-full bg-radial from-sidebar-accent to-sidebar">
                         <div className="py-4 px-8 flex flex-1 items-center justify-center">
@@ -56,7 +58,7 @@ export const CallLobby = ({ onJoin }: CallLobbyProps) => {
                                         </div>
                                         <VideoPreview
                                                 DisabledVideoPreview={
-                                                        hasCameraPermission
+                                                        hasBrowserPermission
                                                                 ? DisabledVideoPreview
                                                                 : AllowBrowserPermissions
                                                 }
